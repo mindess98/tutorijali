@@ -33,18 +33,18 @@ int main()
     int a, b, c;
     std::cin>>a>>b>>c;
 
-    std::cout<<"\nUnesite sirinu plocice u centimetrima: ";
+    std::cout<<"Unesite sirinu plocice u centimetrima: ";
     int d;
     std::cin>>d;
 
     if((a*100)%d!=0 || (b*100)%d!=0 || (c*100)%d!=0)
-        std::cout<<"\nPoplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm nije izvodljivo bez lomljenja plocica";
+        std::cout<<"Poplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm nije izvodljivo bez lomljenja plocica";
     else{
         int aPlocica = 100 * a / d;
         int bPlocica = 100 * b / d;
         int cPlocica = 100 * c / d;
         int sol = aPlocica * bPlocica + 2 * aPlocica * cPlocica + 2 * bPlocica * cPlocica;
-        std::cout<<"\nZa poplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm potrebno je "<<sol<<" plocica.";
+        std::cout<<"Za poplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm potrebno je "<<sol<<" plocica.";
     }
 
     return 0;
