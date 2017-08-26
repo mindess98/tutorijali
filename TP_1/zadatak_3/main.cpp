@@ -39,7 +39,7 @@ int main()
     std::cout<<"| Brojevi | Kvadrati | Korijeni | Logaritmi |\n";
     std::cout<<"+---------+----------+----------+-----------+\n";
     for(int i = a; i<= b; i++){
-        std::cout<<"|"<<i<<"|"<<i*i<<"|"<<sqrt(i)<<"|"<<log(i)<<"|\n";
+        std::cout<<"| "<<std::left<<std::setw(8)<<i<<"|"<<std::right<<std::setw(9)<<i*i<<" |"<<std::setw(9)<<std::fixed<<std::setprecision(3)<<sqrt(i)<<" |"<<std::setw(10)<<std::setprecision(5)<<log(i)<<" |\n";
     }
     std::cout<<"+---------+----------+----------+-----------+";
 
