@@ -40,7 +40,10 @@ int main()
     if((a*100)%d!=0 || (b*100)%d!=0 || (c*100)%d!=0)
         std::cout<<"\nPoplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm nije izvodljivo bez lomljenja plocica";
     else{
-        int sol = (100 *a * b)/d + (200 *b * c)/d + (200 *a * c)/d
+        int aPlocica = 100 * a / d;
+        int bPlocica = 100 * b / d;
+        int cPlocica = 100 * c / d;
+        int sol = aPlocica * bPlocica + 2 * aPlocica * cPlocica + 2 * bPlocica * cPlocica;
         std::cout<<"\nZa poplocavanje bazena dimenzija "<<a<<"x"<<b<<"x"<<c<<"m sa plocicama dimenzija "<<d<<"x"<<d<<"cm potrebno je "<<sol<<" plocica.";
     }
 
