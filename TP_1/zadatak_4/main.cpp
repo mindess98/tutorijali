@@ -26,25 +26,37 @@ broja i da ponavlja postupak sve dok se kao broj ne unese nula. Dijalog između 
 
 #include <iostream>
 
-using namespace std;
-
 int main()
 {
-    int a;
-    do{
+    float a;
+    for(;;){
         std::cout<<"Unesite prirodan broj ili 0 za kraj: ";
         std::cin>>a;
+        if(!std::cin){
+            std::cin.clear();
+            std::cin.ignore(10000, '\n');
+            std::cout<<"Niste unijeli prirodan broj!\n";
+            continue;
+        }
+        if(a < 0){
+            std::cout<<"Niste unijeli prirodan broj!\n";
+            continue;
+        }
+        if(a != (int) a){
+            std::cout<<"Niste unijeli prirodan broj!\n";
+            continue;
+        }
         if(a == 0) {
-            std::cout<<"Dovidjenja!";
+            std::cout<<"Dovidjenja!\n";
             break;
         }
-
+        int b = (int)a;
         int sum = 0;
-        for(int i = 1; i < a; i++)
-            if(a % i == 0) sum += i;
-        if(sum > a) std::cout<<"Broj "<<a<<" je obilan!\n";
-        else if(sum < a) std::cout<<"Broj "<<a<<" je manjkav!\n";
-             else std::cout<<"Broj "<<a<<" je savrsen!\n";
-    }while(true);
+        for(int i = 1; i < b; i++)
+            if(b % i == 0) sum += i;
+        if(sum > b) std::cout<<"Broj "<<b<<" je obilan!\n";
+        else if(sum < b) std::cout<<"Broj "<<b<<" je manjkav!\n";
+             else std::cout<<"Broj "<<b<<" je savrsen!\n";
+    }
     return 0;
 }
