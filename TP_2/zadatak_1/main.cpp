@@ -52,7 +52,7 @@ int main()
         for(int i = 0; i<prostiBrojevi.size() - 1; i++){
             if(prostiBrojevi[i+1] == 0){
                 ent = i;
-            break;
+                break;
             }
             std::cout<<prostiBrojevi[i]<<", ";
         }
