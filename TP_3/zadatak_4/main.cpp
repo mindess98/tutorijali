@@ -1,3 +1,8 @@
+/*
+U prethodnom programu, zamijenite poziv funkcije “push_back” unutar funkcije “IzdvojiElemente”
+(koju ste morali koristiti za njenu realizaciju) sa pozivom funkcije “push_front” i uporedite razliku.
+*/
+
 #include <iostream>
 #include <deque>
 #include <cmath>

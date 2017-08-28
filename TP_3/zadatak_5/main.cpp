@@ -1,3 +1,10 @@
+/*
+U prethodnom programu, izvršite izmjene u funkciji “IzdvojiElemente” tako da se i dalje koristi
+funkcija “push front”, ali da rezultat koji daje funkcija bude isti kakav je bio u Zadatku 3. (tako da i
+ispis koji će program proizvesti bude isti kao u Zadatku 3.). Pri tome, u funkciji nije dozvoljeno
+kreiranje ikakvih pomoćnih kontejnera (nizova, vektora, dekova, itd.).
+*/
+
 #include <iostream>
 #include <deque>
 #include <cmath>

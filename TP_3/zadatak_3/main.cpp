@@ -1,3 +1,8 @@
+/*
+Prepravite prethodni program tako da umjesto tipa “vector” koristi tip “deque” (tj. da koristi dek
+umjesto vektora), i uvjerite se da sve i dalje radi potpuno isto.
+*/
+
 #include <iostream>
 #include <deque>
 #include <cmath>
