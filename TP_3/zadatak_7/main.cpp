@@ -44,7 +44,7 @@ int main()
 }
 
 vector<vector<int>> PascalovTrougao(int n){
-    if(n < 0 ) throw std::domain_error("Broj redova ne smije biti negativan");
+    if(n < 0) throw std::domain_error("Broj redova ne smije biti negativan");
     vector<vector<int>> sol(n);
 
     for(int i = 0; i < n; i++){
