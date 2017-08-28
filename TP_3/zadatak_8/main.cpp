@@ -44,7 +44,7 @@ int main()
 
     std::cout<<"Unesite recenicu: ";
     string recenica;
-    //std::cin.ignore(10000, '\n');
+    std::cin.ignore(10000, '\n');
     std::getline(std::cin, recenica);
 
 
