@@ -4,8 +4,6 @@
 
 using namespace std;
 
-
-
 int main()
 {
     std::cout<<"Koliko zelite unijeti elemenata: ";
