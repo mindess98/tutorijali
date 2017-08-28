@@ -58,7 +58,7 @@ int NajvecaSirina(vector<vector<int>> c){
     int BrojCifara(int);
     int sol = 0;
     for(int i = 0; i < c.size(); i++){
-        for(int j = 0; j < c[0].size(); j++){
+        for(int j = 0; j < c[i].size(); j++){
             int numDig = BrojCifara(c[i][j]);
             if(c[i][j] < 0) numDig++;
             if(numDig > sol) sol = numDig;
