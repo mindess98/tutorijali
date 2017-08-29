@@ -5,17 +5,30 @@
 
 using namespace std;
 
+long double myPow(double baza, int eksponent){
+    long double sol = 1;
+
+    if(eksponent >= 0){
+        for(int i = 0; i < eksponent; i++) sol *= baza;
+    }
+    else {
+        for(int i = 0; i < -eksponent; i++) sol /= baza;
+    }
+
+    return sol;
+}
+
 template <typename T>
 void UnosBroja(string prompt, string err, T& broj){
 
-    cout<<prompt;
 
     string  line;
-    line = "";
+
+    cout<<prompt;
     while(getline(cin, line))
     {
         stringstream linestream(line);
-        if (!linestream >> broj)
+        if (!(linestream >> broj))
         {
             cout<<err;
             continue;
@@ -23,6 +36,7 @@ void UnosBroja(string prompt, string err, T& broj){
         char peekChar;
         if (linestream >> peekChar)
         {
+            if(peekChar == '\n') return;
             cout<<err;
             continue;
         }
@@ -33,9 +47,11 @@ void UnosBroja(string prompt, string err, T& broj){
 
 int main()
 {
-    int broj;
-    UnosBroja("Keks", "Pemeks", broj);
+    double baza;
+    UnosBroja("Unesite bazu: ", "Neispravan unos, pokusajte ponovo...", baza);
+    int eksponent;
+    UnosBroja("Unesite cijelobrojni eksponent: ", "Neispravan unos, pokusajte ponovo...", eksponent);
 
-    cout<<broj;
+    cout<< myPow(baza, eksponent);
     return 0;
 }
