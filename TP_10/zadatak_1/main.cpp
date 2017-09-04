@@ -6,14 +6,11 @@ using namespace std;
 class StedniRacun{
     double stanjeRacuna;
 public:
-    StedniRacun(double sR = 0){
-        if(sR < 0) throw logic_error("Nedozvoljeno pocetno stanje");
-        stanjeRacuna = sR;
-    }
+    StedniRacun(double sR = 0){ if(sR < 0) throw logic_error("Nedozvoljeno pocetno stanje"); stanjeRacuna = sR; }
     double DajStanje() const {return stanjeRacuna;}
     void Ulozi(double u){ stanjeRacuna += u;}
     void Podigni(double p) { if(stanjeRacuna < p) throw logic_error("Transakcija odbijena"); stanjeRacuna -= p;}
-    void ObracunajKamatu(double k) { if(k < 0) throw logic_error("Nedozvoljena kamatna stopa"); stanjeRacuna *= k+1;}
+    void ObracunajKamatu(double k) { if(k < 0) throw logic_error("Japanska kamatna stopa"); stanjeRacuna *= k+1;}
 };
 
 int main()
