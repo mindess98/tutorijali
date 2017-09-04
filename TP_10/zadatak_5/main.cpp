@@ -15,6 +15,10 @@ class Ugao
     double SMSURadijane(int s, int m, int se) const;
     double Normaliziraj(double& rad);
     void Normaliziraj(int& step, int& minu, int& seku){
+        if(step < 0) {
+            minu *= -1;
+            seku *= -1;
+        }
         minu += (seku / 60);
         seku %= 60;
         if(seku < 0){
