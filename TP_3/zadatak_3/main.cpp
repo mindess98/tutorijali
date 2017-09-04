@@ -6,11 +6,17 @@ umjesto vektora), i uvjerite se da sve i dalje radi potpuno isto.
 #include <iostream>
 #include <deque>
 #include <cmath>
+#include <string>
 
 using namespace std;
 
 int main()
 {
+
+    string s("44kek");
+    int x = stoi(s);
+    cout<<x
+
     std::cout<<"Koliko zelite unijeti elemenata: ";
     int n;
     std::cin>>n;
