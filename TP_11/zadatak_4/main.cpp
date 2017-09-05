@@ -236,6 +236,7 @@ int main()
         if(s1 == "Q") return 0;
         cout<<"Unesite ime drugog tima: ";
         getline(cin, s2);
+        cin.ignore(10000, '\n');
 
         int g1, g2;
         cout<<"Unesite broj postignutih golova za oba tima: ";
@@ -245,8 +246,9 @@ int main()
             l.RegistrirajUtakmicu(s1.c_str(), s2.c_str(), g1, g2);
         }
         catch(logic_error& e){
-            cout<<e.what()<<endl;
+            cout<<e.what();
         }
+        cout<<endl<<endl;
         l.IspisiTabelu();
 
     } while(true);
