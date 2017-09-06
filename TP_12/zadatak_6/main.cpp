@@ -3,6 +3,7 @@
 #include <cstring>
 #include <stdexcept>
 #include <new>
+#include <string>
 
 using namespace std;
 
@@ -20,14 +21,29 @@ public:
     Matrica(const Matrica& m);
     Matrica(Matrica&& m);
     ~Matrica() { DealocirajMemoriju(elementi, br_redova); }
-    Matrica& operator=(const Matrica& m);
-    Matrica& operator=(Matrica&& m);
+    Matrica<TipEl>& operator=(const Matrica& m);
+    Matrica<TipEl>& operator=(Matrica&& m);
+    Matrica<TipEl>& operator+=(Matrica<TipEl>& m);
+    Matrica<TipEl>& operator-=(Matrica<TipEl>& m);
+    Matrica<TipEl>& operator*=(Matrica<TipEl>& m);
+    Matrica<TipEl>& operator*=(const TipEl k);
+    operator string() const;
+    TipEl* operator[](int a);
+    TipEl& operator()(int a, int b);
     template <typename Tip2>
     friend Matrica<Tip2> operator+(const Matrica<Tip2>& m1, const Matrica<Tip2>& m2);
     template <typename Tip2>
     friend istream& operator>>(istream& is, Matrica<Tip2>& m);
     template <typename Tip2>
     friend ostream& operator<<(ostream& os, const Matrica<Tip2>& m);
+    template <typename Tip2>
+    friend Matrica<Tip2> operator-(const Matrica<Tip2>& m1, const Matrica<Tip2>& m2);
+    template <typename Tip2>
+    friend Matrica<Tip2> operator*(const Matrica<Tip2>& m1, const Matrica<Tip2>& m2);
+    template <typename Tip2>
+    friend Matrica<Tip2> operator*(const Matrica<Tip2>& m, const Tip2 k);
+    template <typename Tip2>
+    friend Matrica<Tip2> operator*(const Tip2 k, const Matrica<Tip2>& m);
 };
 
 template <typename TipEl>
@@ -130,7 +146,102 @@ Matrica<TipEl> operator+(const Matrica<TipEl>& m1, const Matrica<TipEl>& m2)
             m3.elementi[i][j] = m1.elementi[i][j] + m2.elementi[i][j];
     return m3;
 }
+template <typename TipEl>
+Matrica<TipEl> operator-(const Matrica<TipEl>& m1, const Matrica<TipEl>& m2)
+{
+    if(m1.br_redova != m2.br_redova || m1.br_kolona != m2.br_kolona)
+        throw domain_error("Matrice nemaju jednake dimenzije!");
+    Matrica<TipEl> m3(m1.br_redova, m1.br_kolona);
+    for(int i = 0; i < m1.br_redova; i++)
+        for(int j = 0; j < m1.br_kolona; j++)
+            m3.elementi[i][j] = m1.elementi[i][j] - m2.elementi[i][j];
+    return m3;
+}
+template <typename TipEl>
+Matrica<TipEl> operator*(const Matrica<TipEl>& m, const TipEl k)
+{
+    Matrica<TipEl> sol(m.br_redova, m.br_kolona);
+    for(int i = 0; i < m.br_redova; i++)
+        for(int j = 0; j < m.br_kolona; j++)
+            sol.elementi[i][j] = m.elementi[i][j] * k;
+    return sol;
+}
 
+template <typename TipEl>
+Matrica<TipEl> operator*(const TipEl k, const Matrica<TipEl>& m)
+{
+    Matrica<TipEl> sol(m.br_redova, m.br_kolona);
+    for(int i = 0; i < m.br_redova; i++)
+        for(int j = 0; j < m.br_kolona; j++)
+            sol.elementi[i][j] = m.elementi[i][j] * k;
+    return sol;
+}
+template <typename TipEl>
+Matrica<TipEl> operator*(const Matrica<TipEl>& m1, const Matrica<TipEl>& m2)
+{
+    if(m1.br_kolona != m2.br_redova) throw domain_error("Matrice nisu saglasne za mnozenje");
+    Matrica<TipEl> sol(m1.br_redova, m2.br_kolona);
+    for(int i = 0; i < m1.br_redova; i++){
+        for(int j = 0; j < m2.br_kolona; j++){
+            TipEl suma{};
+            for(int k = 0; k < m1.br_kolona; k++)
+                suma += m1.elementi[i][k] * m2.elementi[k][j];
+            sol.elementi[i][j] = suma;
+        }
+    }
+    return sol;
+}
+
+template <typename TipEl>
+Matrica<TipEl>& Matrica<TipEl>::operator+=(Matrica<TipEl>& m)
+{
+    return *this = (*this) + m;
+}
+
+template <typename TipEl>
+Matrica<TipEl>& Matrica<TipEl>::operator-=(Matrica<TipEl>& m)
+{
+    return *this = (*this) - m;
+}
+template <typename TipEl>
+Matrica<TipEl>& Matrica<TipEl>::operator*=(Matrica<TipEl>& m)
+{
+    return *this = (*this) * m;
+}
+template <typename TipEl>
+Matrica<TipEl>& Matrica<TipEl>::operator*=(const TipEl k)
+{
+    return *this = (*this) * k;
+}
+template <typename TipEl>
+TipEl* Matrica<TipEl>::operator[](int a)
+{
+    return this->elementi[a];
+}
+template <typename TipEl>
+TipEl& Matrica<TipEl>::operator()(int a, int b)
+{
+    if(a < 1 || a > br_redova || b < 1 || b > br_kolona) throw range_error("Neispravan indeks");
+    return elementi[a-1][b-1];
+}
+
+template <typename TipEl>
+Matrica<TipEl>::operator string() const
+{
+    string sol;
+    sol+="{";
+    for(int i = 0; i < br_redova; i++){
+        sol+="{";
+        for(int j = 0; j < br_redova - 1; j++){
+            sol+=to_string(elementi[i][j]);
+            sol+=",";
+        }
+        sol+=to_string(elementi[i][br_redova-1]);
+        sol+="}";
+    }
+    sol+="}";
+    return sol;
+}
 
 using namespace std;
 
@@ -144,6 +255,6 @@ int main()
     cout<<"Unesi matricu B:\n";
     cin>>b;
     cout<<"Zbir ove dvije matrice je:\n";
-    cout<<setw(3)<<a+b;
+    cout<<setw(3)<<(a*=b);
     return 0;
 }
