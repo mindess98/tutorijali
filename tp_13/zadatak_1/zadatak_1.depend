@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1504772806 source:c:\users\pchardware\desktop\tutorijali\tp_13\zadatak_1\main.cpp
+	<iostream>
+	<cmath>
+	<stdexcept>
+	<memory>
+	<vector>
+	<cctype>
+	<cstdio>
+
