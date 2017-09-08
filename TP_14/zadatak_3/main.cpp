@@ -40,6 +40,7 @@ class Liga
 public:
     explicit Liga(int velicina_lige);
     explicit Liga(std::initializer_list<Tim> lista_timova);
+    explicit Liga(string dat);
     ~Liga();
     Liga(const Liga& l);
     Liga(Liga&& l);
@@ -52,6 +53,32 @@ public:
     void SacuvajStanje(string dat) const;
     void AzurirajIzDatoteke(string dat);
 };
+
+Liga::Liga(string dat) : max_br_timova(30) //workaround
+{
+    ifstream ifs(dat, ios::binary);
+    ifs.seekg(0, ios::end);
+    int velicina_datoteke(ifs.tellg());
+    ifs.seekg(0, ios::beg);
+
+    int broj_elemenata(velicina_datoteke / (sizeof(Tim)));
+    broj_timova = broj_elemenata;
+    timovi = new Tim*[broj_elemenata];
+    for(int i = 0; i < broj_elemenata; i++){
+        Tim t("temp");
+        ifs.read(reinterpret_cast<char*>(&t), sizeof(Tim));
+        timovi[i] = new Tim(t);
+    }
+    cout<<"Van petlje";
+}
+
+void Liga::SacuvajStanje(string dat) const
+{
+    ofstream ofs(dat, ios::binary);
+    for(int i = 0; i < broj_timova; i++)
+        ofs.write(reinterpret_cast<char*>(timovi[i]), sizeof(Tim));
+}
+
 
 
 void Liga::AzurirajIzDatoteke(string dat)
@@ -261,8 +288,13 @@ int main()
 
     l.AzurirajIzDatoteke("utak.txt");
 
+    l.SacuvajStanje("stanje.dat");
+
+    Liga f("stanje.dat");
+
     cout<<endl;
-    l.IspisiTabelu();
+    f.IspisiTabelu();
+
 
     /*
     do{
