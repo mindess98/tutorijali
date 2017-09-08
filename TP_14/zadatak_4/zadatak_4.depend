@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1504892930 source:c:\users\pchardware\desktop\tutorijali\tp_14\zadatak_4\main.cpp
+	<iostream>
+	<fstream>
+	<vector>
+
